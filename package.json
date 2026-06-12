@@ -24,6 +24,8 @@
     "@hd/core-contracts": "file:../HD-CORE/packages/contracts",
     "@hd/core-rbac": "file:../HD-CORE/packages/rbac",
     "@hd/core-types": "file:../HD-CORE/packages/types",
-    "@hd/core-validation": "file:../HD-CORE/packages/validation"
+    "@hd/core-validation": "file:../HD-CORE/packages/validation",
+    "@hd/core-tokens": "file:../HD-CORE/packages/tokens",
+    "@hd/core-ui": "file:../HD-CORE/packages/ui"
   }
 }
