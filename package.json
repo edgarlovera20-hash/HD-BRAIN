@@ -3,12 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "lint": "echo TODO lint",
     "test": "echo TODO test",
+    "typecheck": "tsc --noEmit",
     "build": "echo TODO build"
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "prisma": "^5.22.0"
   }
 }

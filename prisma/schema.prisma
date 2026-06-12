@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model GlobalKpiSnapshot {
+  id          String   @id @default(uuid())
+  platformId  String
+  health      String
+  kpis        Json
+  generatedAt DateTime @default(now())
+}
+
+model RiskSignal {
+  id             String   @id @default(uuid())
+  sourcePlatform String
+  title          String
+  description    String
+  level          String
+  confidence     Float
+  detectedAt     DateTime @default(now())
+}
+
+model Recommendation {
+  id               String   @id @default(uuid())
+  title            String
+  source           String
+  explanation      String
+  confidence       Float
+  status           String   @default("draft")
+  requiresApproval Boolean  @default(true)
+  createdAt        DateTime @default(now())
+}
+
+model DecisionLog {
+  id             String   @id @default(uuid())
+  actorId        String
+  actorType      String
+  action         String
+  reason         String
+  sourcePlatform String
+  createdAt      DateTime @default(now())
+}
+
+model AgentRun {
+  id                  String   @id @default(uuid())
+  agentId             String
+  requestedBy         String
+  context             Json
+  result              Json?
+  confidence          Float?
+  requiresHumanReview Boolean  @default(true)
+  createdAt           DateTime @default(now())
+}
