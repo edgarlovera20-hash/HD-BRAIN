@@ -6,6 +6,7 @@ import authRoutes from "./server/routes/auth.js";
 import agentRouter from "./server/routes/agent.js";
 import healthRoutes from "./server/routes/health.js";
 import insightsRoutes from "./server/routes/insights.js";
+import eventsRouter from "./server/routes/events.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -18,6 +19,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/agent", agentRouter);
 app.use("/api", healthRoutes);
 app.use("/api", insightsRoutes);
+app.use("/api/events", eventsRouter);
 
 if (!isDev) {
   const clientDist = path.join(__dirname, "dist/client");

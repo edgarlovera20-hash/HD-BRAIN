@@ -4,6 +4,7 @@ import { z } from "zod";
 import { auditLog } from "../middleware/auditLog.js";
 import { requireAuth, type AuthRequest } from "../middleware/requireAuth.js";
 import type { Decision, Kpi, Recommendation, RiskSignal } from "../types.js";
+import { emitEvent } from "../events/emitter.js";
 
 const router = Router();
 
@@ -178,6 +179,14 @@ router.post("/decisions", requireAuth, auditLog, (req: AuthRequest, res) => {
   };
 
   DECISIONS.unshift(decision);
+
+  emitEvent(
+    "brain.decision.logged",
+    { decisionId: decision.id, title: decision.title },
+    "HD-BRAIN",
+    { id: req.user?.sub ?? "system", type: "user" },
+    decision.correlationId
+  );
 
   // Audit stub — in production this persists an immutable AuditEntry to the audit DB.
   // HD-BRAIN's decision log is its own domain, so appending here is permitted.
