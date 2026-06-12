@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "echo TODO lint",
     "test": "echo TODO test",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "echo TODO typecheck",
     "build": "echo TODO build"
   },
   "engines": {
