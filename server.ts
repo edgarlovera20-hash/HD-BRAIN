@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./server/routes/auth.js";
+import agentRouter from "./server/routes/agent.js";
 import healthRoutes from "./server/routes/health.js";
 import insightsRoutes from "./server/routes/insights.js";
 
@@ -14,6 +15,7 @@ const isDev = process.env.NODE_ENV !== "production";
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/agent", agentRouter);
 app.use("/api", healthRoutes);
 app.use("/api", insightsRoutes);
 
