@@ -1,0 +1,14 @@
+{
+  "name": "hd-brain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "echo TODO lint",
+    "test": "echo TODO test",
+    "build": "echo TODO build"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

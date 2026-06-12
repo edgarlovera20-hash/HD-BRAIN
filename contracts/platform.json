@@ -1,0 +1,6 @@
+{
+  "repository": "HD-BRAIN",
+  "ecosystem": "Heavenly Dreams",
+  "status": "bootstrap",
+  "requires": ["HD-CORE"]
+}
