@@ -2,18 +2,45 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
   validate:
+    name: Validate HD-BRAIN
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkoutv4
-      - uses: actions/setup-nodev4
+      - name: Checkout HD-BRAIN
+        uses: actions/checkout@v4
+        with:
+          path: HD-BRAIN
+
+      - name: Checkout HD-CORE
+        uses: actions/checkout@v4
+        with:
+          repository: edgarlovera20-hash/HD-CORE
+          path: HD-CORE
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: |
-          test -f README.md
-          test -f docs/ARCHITECTURE.md
-          test -f contracts/platform.json
+
+      - name: Install dependencies
+        working-directory: HD-BRAIN
+        run: npm install
+
+      - name: Typecheck
+        working-directory: HD-BRAIN
+        run: npm run typecheck
+
+      - name: Test
+        working-directory: HD-BRAIN
+        run: npm test
