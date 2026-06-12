@@ -17,7 +17,13 @@
     "node": ">=20.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
-    "prisma": "^5.22.0"
+    "prisma": "^5.22.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@hd/core-contracts": "file:../HD-CORE/packages/contracts",
+    "@hd/core-rbac": "file:../HD-CORE/packages/rbac",
+    "@hd/core-types": "file:../HD-CORE/packages/types",
+    "@hd/core-validation": "file:../HD-CORE/packages/validation"
   }
 }
