@@ -1,58 +1,69 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
+// prisma/schema.prisma
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model GlobalKpiSnapshot {
-  id          String   @id @default(uuid())
-  platformId  String
-  health      String
-  kpis        Json
-  generatedAt DateTime @default(now())
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Trend {
+  up
+  down
+  flat
+}
+
+enum RiskSeverity {
+  low
+  medium
+  high
+  critical
+}
+
+enum RecommendationStatus {
+  pending
+  reviewed
+}
+
+model Kpi {
+  id        String   @id @default(cuid())
+  label     String
+  value     Float
+  unit      String
+  trend     Trend    @default(flat)
+  deltaPct  Float    @default(0)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 }
 
 model RiskSignal {
-  id             String   @id @default(uuid())
-  sourcePlatform String
-  title          String
-  description    String
-  level          String
-  confidence     Float
-  detectedAt     DateTime @default(now())
+  id          String       @id @default(cuid())
+  title       String
+  severity    RiskSeverity @default(medium)
+  platformSrc String
+  description String
+  detectedAt  DateTime     @default(now())
+  createdAt   DateTime     @default(now())
 }
 
 model Recommendation {
-  id               String   @id @default(uuid())
-  title            String
-  source           String
-  explanation      String
-  confidence       Float
-  status           String   @default("draft")
-  requiresApproval Boolean  @default(true)
-  createdAt        DateTime @default(now())
+  id             String               @id @default(cuid())
+  title          String
+  rationale      String
+  priority       Int                  @default(1)
+  targetPlatform String
+  status         RecommendationStatus @default(pending)
+  decisions      Decision[]
+  createdAt      DateTime             @default(now())
 }
 
-model DecisionLog {
-  id             String   @id @default(uuid())
-  actorId        String
-  actorType      String
-  action         String
-  reason         String
-  sourcePlatform String
-  createdAt      DateTime @default(now())
-}
-
-model AgentRun {
-  id                  String   @id @default(uuid())
-  agentId             String
-  requestedBy         String
-  context             Json
-  result              Json?
-  confidence          Float?
-  requiresHumanReview Boolean  @default(true)
-  createdAt           DateTime @default(now())
+model Decision {
+  id                     String          @id @default(cuid())
+  title                  String
+  rationale              String
+  linkedRecommendationId String?
+  recommendation         Recommendation? @relation(fields: [linkedRecommendationId], references: [id])
+  correlationId          String
+  createdAt              DateTime        @default(now())
 }
