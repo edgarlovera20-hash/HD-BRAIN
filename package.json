@@ -3,27 +3,55 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "lint": "echo TODO lint",
-    "test": "echo TODO test",
+    "dev": "tsx server.ts",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:server": "esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "start": "node dist/server.cjs",
     "typecheck": "tsc --noEmit",
-    "build": "echo TODO build"
+    "lint": "tsc --noEmit",
+    "test": "echo TODO test",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"server/**/*.ts\"",
+    "postinstall": "prisma generate"
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "devDependencies": {
-    "prisma": "^5.22.0",
-    "typescript": "^5.6.3"
   },
   "dependencies": {
     "@hd/core-contracts": "file:../HD-CORE/packages/contracts",
     "@hd/core-rbac": "file:../HD-CORE/packages/rbac",
     "@hd/core-types": "file:../HD-CORE/packages/types",
-    "@hd/core-validation": "file:../HD-CORE/packages/validation"
+    "@hd/core-validation": "file:../HD-CORE/packages/validation",
+    "@hd/core-tokens": "file:../HD-CORE/packages/tokens",
+    "@hd/core-ui": "file:../HD-CORE/packages/ui",
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.5.2",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^0.546.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.15.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "prisma": "^5.22.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^4.17.25",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.19.19",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^5.0.4",
+    "esbuild": "^0.28.0",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3",
+    "prettier": "^3.8.4"
   }
 }

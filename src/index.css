@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-hd-primary: #0066FF;
+  --color-hd-primary-hover: #0052CC;
+  --color-hd-secondary: #00A3FF;
+  --color-hd-success: #10B981;
+  --color-hd-warning: #F59E0B;
+  --color-hd-error: #EF4444;
+  --color-hd-bg-base: #0A0F1C;
+  --color-hd-bg-surface: #111827;
+  --color-hd-bg-elevated: #161F33;
+  --color-hd-text-primary: #F9FAFB;
+  --color-hd-text-secondary: #E5E7EB;
+  --color-hd-text-muted: #9CA3AF;
+  --color-hd-border: #1F2937;
+  --color-hd-border-strong: #334155;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Poppins", "Inter", system-ui, sans-serif;
+}
+
+body {
+  background-color: #0A0F1C;
+  color: #F9FAFB;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
