@@ -65,7 +65,7 @@ export function getObservedSignals(): ObservedSignal[] {
 
 type HandlerFn = (env: IngestEnvelope) => void;
 
-const handlers: Record<string, HandlerFn> = {
+const handlers: Record<string, HandlerFn | undefined> = {
   "web.lead.submitted": (env) => {
     const p = env.payload as { name?: string; phone?: string };
     pushSignal({ eventName: env.eventName, producer: env.producer, correlationId: env.correlationId, summary: `New lead from web: ${p.name ?? "unknown"}`, payload: env.payload });
